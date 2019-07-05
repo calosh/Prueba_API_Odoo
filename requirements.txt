@@ -1,0 +1,10 @@
+certifi==2019.6.16
+chardet==3.0.4
+extend-me==1.1.4
+idna==2.8
+odoo-rpc-client==1.0.0
+pkg-resources==0.0.0
+requests==2.22.0
+simplejson==3.16.0
+six==1.12.0
+urllib3==1.25.3
