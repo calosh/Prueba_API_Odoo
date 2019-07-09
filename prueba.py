@@ -44,12 +44,15 @@ for p in product_list:
     print('id: ', p.id, 'name: ', p.name, 'price: ', p.list_price, 'active: ', p.active, 'categoria: ', p.categ_id)
 
 
+producto = product_list[0]
+producto2 = productos.search_records([('id', '=', 27)])[0]
+print("list_prices: ", producto.list_price)
 '''
     Facturas
 '''
 print('FACTURAS')
-facturas = client['account.invoice']
-facturas_list = facturas.search_records([])
+account_invoice = client['account.invoice']
+facturas_list = account_invoice.search_records([])
 for f in facturas_list:
     print(f)
 
@@ -66,8 +69,14 @@ print(carlos.name)
 
 
 print('Crear factura')
-factura_obj = facturas.create_record({'partner_id': 25, 'invoice_line_ids':[(0, 0, {'product_id':31, 'quantity':2})]})
+'''
+factura_obj = account_invoice.create_record({'partner_id': 25, 'invoice_line_ids':[(0, 0, {'product_id':producto.id, 'name':producto.name, 'price_unit': producto.list_price, 'quantity':3, 'account_id':4})]})
 print(factura_obj.partner_id)
+'''
+factura_obj = account_invoice.create_record({'partner_id': 25})
+account_invoice_line = client['account.invoice.line']
+detalle_factura = account_invoice_line.create_record({'product_id':producto.id, 'name':producto.name, 'price_unit': producto.list_price, 'quantity':5, 'invoice_id':factura_obj.id, 'account_id':290})
+account_invoice_line.create_record({'product_id':producto2.id, 'name':producto2.name, 'price_unit': producto2.list_price, 'quantity':3, 'invoice_id':factura_obj.id, 'account_id':290})
 
 #lines = factura_obj.get('invoice_line_ids')
 #print('si linea: ', lines)
