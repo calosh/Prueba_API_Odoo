@@ -32,4 +32,18 @@ for p in product_list:
     print('id: ', p.id, 'name: ', p.name, 'price: ', p.list_price, 'active: ', p.active, 'categoria: ', p.categ_id, 'existencias: ',p.qty_available)
 
 
-producto = product_list[0]
+
+'''
+    Producto categoria
+'''
+print('PRODUCTO categoria')
+productos = client['product.template']  # or You may use 'db.get_obj('sale.order')' if You like
+# 12 Vinos
+# 11 Ron
+
+#product_list = productos.search_records([('categ_id', '=', 11)]) #caso sub categoria
+product_list = productos.search_records([('categ_id.parent_id', '=', 10)]) #caso categoria
+for p in product_list:
+    print('id: ', p.id, 'name: ', p.name, 'price: ', p.list_price, 'active: ', p.active, 'categoria: ', p.categ_id, 'existencias: ',p.qty_available)
+
+
