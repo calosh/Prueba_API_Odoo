@@ -14,13 +14,13 @@ client = Client(url, db, username, password)
 hr_employee = client['hr.employee']
 empleado = hr_employee.search_records([('work_email', '=', 'carlosxtacuri@gmail.com')])
 if empleado:
-    print(empleado[0])
-    id_calendario = empleado[0].resource_calendar_id.id
+    empleado = empleado[0]
+    print(empleado)
+
+    print('Departamento: ', empleado.department_id.name)
+    id_calendario = empleado.resource_calendar_id.id
     resource_calendar = client['resource.calendar']
-    horario = resource_calendar.search_records([('id','=', empleado[0].resource_calendar_id.id)])
-
-
-    # Resource calnedar attendance
+    horario = resource_calendar.search_records([('id','=', empleado.resource_calendar_id.id)])
     resource_calendar_attendance = client['resource.calendar.attendance']
     dias = resource_calendar_attendance.search_records([('calendar_id', '=', id_calendario)])
 
